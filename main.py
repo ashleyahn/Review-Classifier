@@ -2,6 +2,7 @@ import math
 import sys
 import student_code as nbc
 import unittest
+import numpy
 
 def check_imports(source_name):
 
@@ -72,6 +73,27 @@ class NaiveBayesTest(unittest.TestCase):
         print(fp,fn)
         self.assertGreater(fp,0.90)
         self.assertGreater(fn,0.60)
+
+    def test2(self):
+        classifier = nbc.Bayes_Classifier()
+        classifier.train(data[:12478])
+        datacopy = ["5"+d[1:] for d in data]
+        predictions = classifier.classify(datacopy[12478:])
+        fp, fn = f_score(data[12478:],predictions)
+        print(fp,fn)
+    
+    def test_random(self):
+        trials = 20
+        for _ in range(trials):
+            numpy.random.shuffle(data)
+            training, test = data[:12478], data[12478:]
+            classifier = nbc.Bayes_Classifier()
+            classifier.train(training)
+            predictions = classifier.classify(test)
+            fp, fn = f_score(test,predictions)
+            print(fp,fn)
+            self.assertGreater(fp,0.90)
+            self.assertGreater(fn,0.60)
 
 if __name__ == "__main__":
     load_data()
