@@ -1,6 +1,6 @@
 import math
 import sys
-import student_code as nbc
+import bayes_classifier as nbc
 import unittest
 import numpy
 
