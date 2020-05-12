@@ -1,25 +1,25 @@
 import math
-import sys
 import bayes_classifier as nbc
 import unittest
 import numpy
 
-def check_imports(source_name):
+# def check_imports(source_name):
 
-    imports = []
+#     imports = []
 
-    with open('student_code.py',"r") as f:
-        tokens = f.read().replace("\n", " ").split()
+#     with open('student_code.py',"r") as f:
+#         tokens = f.read().replace("\n", " ").split()
 
-    for i in range(len(tokens)-1):
-        if tokens[i] == 'import':
-            imports.append(tokens[i+1])
+#     for i in range(len(tokens)-1):
+#         if tokens[i] == 'import':
+#             imports.append(tokens[i+1])
 
-    print('Imported Packages:')
-    for i in range(len(imports)):
-        print('  %s' % imports[i])
-    print(' ')
+#     print('Imported Packages:')
+#     for i in range(len(imports)):
+#         print('  %s' % imports[i])
+#     print(' ')
 
+# calculates an f-score that takes into account the precision and recall of the classifier for a given class
 def f_score(data,predict):
 
     actual = []
@@ -35,6 +35,7 @@ def f_score(data,predict):
     fp = 0
     tn = 0
     fn = 0
+
     for i in range(len(actual)):
         if predict[i] == '5' and actual[i] == '5':
             tp = tp + 1
@@ -57,6 +58,7 @@ def f_score(data,predict):
 
 data = []
 
+# saves data in text file into global var data
 def load_data():
     global data
     f = open('alldata.txt', "r")
@@ -64,7 +66,11 @@ def load_data():
     f.close()
 
 class NaiveBayesTest(unittest.TestCase):
+    # f-score for classifying positive reviews should be greater than 0.9
+    # f-score for classifying negative reviews should be greater than 0.6
 
+
+    # trains using first half of data and classifies/checks for accuracy using second half of data
     def test1(self):
         classifier = nbc.Bayes_Classifier()
         classifier.train(data[:12478])
@@ -74,6 +80,8 @@ class NaiveBayesTest(unittest.TestCase):
         self.assertGreater(fp,0.90)
         self.assertGreater(fn,0.60)
 
+    # makes all reviews 5 stars
+    # tests that we aren't using the rating fields for classifying accidentally
     def test2(self):
         classifier = nbc.Bayes_Classifier()
         classifier.train(data[:12478])
@@ -82,6 +90,7 @@ class NaiveBayesTest(unittest.TestCase):
         fp, fn = f_score(data[12478:],predictions)
         print(fp,fn)
     
+    # tests with random sets of the data
     def test_random(self):
         trials = 20
         for _ in range(trials):
