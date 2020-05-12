@@ -54,7 +54,7 @@ class NaiveBayesTest(unittest.TestCase):
     # f-score for classifying negative reviews should be greater than 0.6
 
 
-    # trains using first half of data and classifies/checks for accuracy using second half of data
+    # trains using first 90% of data and classifies/checks for accuracy using last 10% of data
     def test1(self):
         classifier = nbc.Bayes_Classifier()
         classifier.train(data[:12478])
