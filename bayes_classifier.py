@@ -14,7 +14,7 @@ class Bayes_Classifier:
     # trains the classifier by counting how many times a word is in a positive or negative review
     def train(self, lines):
         for line in lines:
-            # saves data of a line thats split into 3 (number of stars, ID #, review text) list fields
+            # saves data of a line thats split into 3 (number of stars, ID #, review text) into a list fields
             line = line.replace('\n','')
             fields = line.split('|')
             # counts the number of positive and negative reviews
