@@ -3,22 +3,6 @@ import bayes_classifier as nbc
 import unittest
 import numpy
 
-# def check_imports(source_name):
-
-#     imports = []
-
-#     with open('student_code.py',"r") as f:
-#         tokens = f.read().replace("\n", " ").split()
-
-#     for i in range(len(tokens)-1):
-#         if tokens[i] == 'import':
-#             imports.append(tokens[i+1])
-
-#     print('Imported Packages:')
-#     for i in range(len(imports)):
-#         print('  %s' % imports[i])
-#     print(' ')
-
 # calculates an f-score that takes into account the precision and recall of the classifier for a given class
 def f_score(data,predict):
 
